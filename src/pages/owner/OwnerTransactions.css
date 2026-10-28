@@ -1,0 +1,222 @@
+.owner-transactions-page {
+  display: grid;
+  gap: 24px;
+}
+
+.owner-transactions-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.owner-transactions-heading .page-header h1 {
+  margin-bottom: 12px;
+}
+
+.owner-transactions-heading__meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 9px;
+  color: #688078;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+.owner-transactions-heading__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6ca486;
+  box-shadow: 0 0 0 4px rgba(108, 164, 134, .15);
+}
+
+.owner-transactions-page .summary-grid {
+  margin-top: 4px;
+}
+
+.transaction-filter-panel {
+  padding: 24px;
+  border: 1px solid #e0e0d7;
+  background: #fbfaf6;
+  box-shadow: 0 12px 30px rgba(31, 41, 40, .04);
+}
+
+.transaction-filter-panel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.transaction-filter-panel__eyebrow {
+  color: #bd775a;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.transaction-filter-panel h2 {
+  margin: 6px 0 0;
+  color: #1f2928;
+  font-size: 20px;
+  letter-spacing: -.04em;
+}
+
+.transaction-filter-panel .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.transaction-date-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #70807a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.transaction-filter-panel input,
+.transaction-filter-panel select,
+.transaction-filter-panel button {
+  min-height: 40px;
+  border: 1px solid #d8dcd3;
+  border-radius: 3px;
+  color: #38504a;
+  background: #fff;
+  font-size: 12px;
+}
+
+.transaction-filter-panel input,
+.transaction-filter-panel select {
+  padding: 0 11px;
+}
+
+.transaction-filter-panel input:first-child {
+  min-width: 210px;
+}
+
+.transaction-filter-panel button {
+  padding: 0 12px;
+  background: #f5f3ed;
+  font-weight: 700;
+}
+
+.transaction-filter-panel button:hover,
+.transaction-clear-button:hover {
+  border-color: #bd775a;
+  color: #a9553a;
+}
+
+.transaction-clear-button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #d8dcd3;
+  border-radius: 3px;
+  color: #70807a;
+  background: transparent;
+  font-size: 11px;
+}
+
+.transaction-status {
+  display: inline-flex;
+  padding: 5px 8px;
+  border-radius: 99px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.transaction-status--green { color: #2d7770; background: #e5f1eb; }
+.transaction-status--orange { color: #9a6a25; background: #fbefd8; }
+.transaction-status--red { color: #a9553a; background: #fbe9e3; }
+.transaction-status--gray { color: #687771; background: #edf0eb; }
+
+.owner-transactions-page .transaction-table {
+  min-width: 850px;
+  border-collapse: collapse;
+  background: #fbfaf6;
+}
+
+.owner-transactions-page .transaction-table th {
+  padding: 13px 15px;
+  border-bottom: 1px solid #d8dcd3;
+  color: #7b8981;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.owner-transactions-page .transaction-table td {
+  padding: 16px 15px;
+  border-bottom: 1px solid #ecece5;
+  color: #526a62;
+  font-size: 12px;
+}
+
+.owner-transactions-page .transaction-table tbody tr:hover {
+  background: #f5f3ed;
+}
+
+.owner-transactions-page .transaction-table td:nth-child(1) {
+  color: #a0aaa3;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+}
+
+.owner-transactions-page .transaction-table td:nth-child(4) {
+  color: #1f2928;
+  font-weight: 800;
+}
+
+.owner-transactions-page .transaction-table td button {
+  padding: 7px 11px;
+  border: 1px solid #d8dcd3;
+  border-radius: 3px;
+  color: #2d7770;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.owner-transactions-page .transaction-table td button:hover {
+  border-color: #2d7770;
+  background: #e5f1eb;
+}
+
+.owner-transactions-page .pagination {
+  align-items: center;
+  color: #70807a;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+}
+
+.owner-transactions-page .pagination button {
+  padding: 8px 12px;
+  border: 1px solid #d8dcd3;
+  border-radius: 3px;
+  color: #38504a;
+  background: #fbfaf6;
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .owner-transactions-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .owner-transactions-heading__meta { padding-bottom: 0; }
+  .transaction-filter-panel { padding: 18px; }
+  .transaction-filter-panel__top { align-items: flex-start; }
+  .transaction-filter-panel .toolbar > * { flex: 1 1 140px; }
+  .transaction-filter-panel input:first-child { min-width: 0; flex-basis: 100%; }
+}

@@ -1,0 +1,1 @@
+export default function LoadingSpinner({ fullScreen = false, label = 'Loading' }) { return <div className={`loading-state${fullScreen ? ' loading-state--full' : ''}`} role="status"><span className="spinner" aria-hidden="true" />{label}</div>; }

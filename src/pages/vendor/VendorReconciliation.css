@@ -1,0 +1,41 @@
+.vendor-reconciliation-page { display: grid; gap: 24px; }
+.vendor-reconciliation-heading, .vendor-reconciliation-day, .vendor-reconciliation-actions { display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+.vendor-reconciliation-toolbar { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding: 18px 20px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.vendor-reconciliation-toolbar div { display: grid; gap: 7px; }
+.vendor-reconciliation-toolbar label { color: #526a62; font-size: 11px; font-weight: 800; }
+.vendor-reconciliation-toolbar input { min-height: 40px; padding: 0 11px; border: 1px solid #d8dcd3; border-radius: 3px; color: #38504a; background: #fff; }
+.vendor-reconciliation-toolbar > span, .vendor-reconciliation-day p, .vendor-reconciliation-actions p { margin: 0; color: #70807a; font-size: 12px; }
+.vendor-reconciliation-day { align-items: center; padding: 20px 24px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.vendor-reconciliation-day h2 { margin: 7px 0 0; color: #1f2928; font-size: 24px; letter-spacing: -.04em; }
+.vendor-reconciliation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.vendor-reconciliation-position { padding: 24px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.vendor-reconciliation-position--cash { border-top: 4px solid #bd6546; }
+.vendor-reconciliation-position--momo { border-top: 4px solid #2d7770; }
+.vendor-reconciliation-position__heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #e0e0d7; }
+.vendor-reconciliation-position__heading span { color: #526a62; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; }
+.vendor-reconciliation-position__heading strong { color: #1f2928; font-size: 24px; }
+.vendor-reconciliation-position__row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid #ecece5; color: #70807a; font-size: 12px; }
+.vendor-reconciliation-position__row strong { color: #38504a; text-align: right; }
+.vendor-reconciliation-position small { display: block; padding-top: 14px; color: #8a9890; font-size: 10px; }
+.vendor-reconciliation-status { display: inline-flex; width: fit-content; padding: 5px 8px; border-radius: 99px; font-family: 'DM Mono', monospace; font-size: 10px; }
+.vendor-reconciliation-status--open { color: #2d7770; background: #e5f1eb; }
+.vendor-reconciliation-status--closed { color: #a9553a; background: #fbe9e3; }
+.vendor-reconciliation-activity { display: flex; justify-content: space-between; gap: 20px; padding: 24px; color: #f8f6ee; background: #1d3734; }
+.vendor-reconciliation-activity h2 { margin: 8px 0 0; font-size: 20px; }
+.vendor-reconciliation-activity .eyebrow { color: #e7b66f; }
+.vendor-reconciliation-activity__metrics { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; color: #aebeb4; font-size: 11px; }
+.vendor-reconciliation-activity__metrics strong { display: block; margin-top: 5px; color: #fff; font-size: 14px; }
+.vendor-reconciliation-closing { display: grid; grid-template-columns: 1fr auto; gap: 10px 20px; align-items: center; padding: 20px 24px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.vendor-reconciliation-closing h2 { margin: 7px 0 0; color: #1f2928; font-size: 20px; }
+.vendor-reconciliation-closing p { margin: 6px 0 0; color: #70807a; font-size: 12px; }
+.vendor-reconciliation-closing__details { display: flex; flex-wrap: wrap; gap: 24px; grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid #ecece5; color: #70807a; font-size: 11px; }
+.vendor-reconciliation-closing__details strong { display: block; margin-top: 5px; color: #38504a; }
+.vendor-reconciliation-actions { align-items: center; padding: 20px 24px; border: 1px solid #d8dcd3; background: #fff; }
+.vendor-reconciliation-actions strong { color: #1f2928; }
+.vendor-reconciliation-actions div:last-child { display: flex; flex-wrap: wrap; gap: 10px; }
+.vendor-reconciliation-unavailable { padding: 16px 18px; border-left: 3px solid #dba85e; background: #fbefd8; color: #6f5729; font-size: 12px; }
+.vendor-reconciliation-unavailable p { margin: 6px 0 0; line-height: 1.5; }
+.vendor-reconciliation-error { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid #efc8bd; background: #fff5f1; }
+.vendor-reconciliation-error .form-error { margin: 0; }
+.vendor-reconciliation-empty { padding: 32px; border: 1px dashed #d8dcd3; color: #70807a; text-align: center; }
+@media (max-width: 700px) { .vendor-reconciliation-heading, .vendor-reconciliation-toolbar, .vendor-reconciliation-day, .vendor-reconciliation-actions { align-items: flex-start; flex-direction: column; }.vendor-reconciliation-grid { grid-template-columns: 1fr; }.vendor-reconciliation-activity { flex-direction: column; }.vendor-reconciliation-closing { grid-template-columns: 1fr; } }

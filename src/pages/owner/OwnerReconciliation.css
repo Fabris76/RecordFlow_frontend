@@ -1,0 +1,39 @@
+.owner-reconciliation-page { display: grid; gap: 24px; }
+.owner-reconciliation-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.owner-reconciliation-heading .button { margin-bottom: 10px; }
+.reconciliation-filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; padding: 20px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.reconciliation-filters div { display: grid; gap: 7px; min-width: 210px; }
+.reconciliation-filters label { color: #526a62; font-size: 11px; font-weight: 800; }
+.reconciliation-filters input, .reconciliation-filters select { min-height: 40px; padding: 0 11px; border: 1px solid #d8dcd3; border-radius: 3px; color: #38504a; background: #fff; }
+.reconciliation-filters span[role="alert"] { color: #a9553a; font-size: 12px; }
+.reconciliation-vendor-heading { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.reconciliation-vendor-heading h2 { margin: 8px 0 4px; color: #1f2928; font-size: 28px; letter-spacing: -.05em; }
+.reconciliation-vendor-heading p { margin: 0; color: #70807a; font-size: 12px; }
+.reconciliation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.reconciliation-position { padding: 24px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.reconciliation-position--cash { border-top: 4px solid #bd6546; }
+.reconciliation-position--momo { border-top: 4px solid #2d7770; }
+.reconciliation-position__heading { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #e0e0d7; }
+.reconciliation-position__heading span { color: #526a62; font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; }
+.reconciliation-position__heading strong { color: #1f2928; font-size: 24px; }
+.reconciliation-position__row { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid #ecece5; color: #70807a; font-size: 12px; }
+.reconciliation-position__row strong { color: #38504a; font-weight: 700; text-align: right; }
+.reconciliation-closing { display: grid; grid-template-columns: 1fr auto; gap: 10px 20px; align-items: center; padding: 20px 24px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.reconciliation-closing h2 { margin: 7px 0 0; color: #1f2928; font-size: 20px; letter-spacing: -.04em; }
+.reconciliation-status { display: inline-flex; width: fit-content; padding: 5px 8px; border-radius: 99px; font-family: 'DM Mono', monospace; font-size: 10px; }
+.reconciliation-status--open { color: #2d7770; background: #e5f1eb; }
+.reconciliation-status--closed { color: #a9553a; background: #fbe9e3; }
+.reconciliation-closing__details { display: flex; flex-wrap: wrap; gap: 24px; grid-column: 1 / -1; padding-top: 12px; border-top: 1px solid #ecece5; color: #70807a; font-size: 11px; }
+.reconciliation-closing__details strong { display: block; margin-top: 5px; color: #38504a; }
+.reconciliation-activity { display: flex; justify-content: space-between; gap: 20px; padding: 24px; color: #f8f6ee; background: #1d3734; }
+.reconciliation-activity h2 { margin: 8px 0 0; font-size: 20px; letter-spacing: -.04em; }
+.reconciliation-activity .eyebrow { color: #e7b66f; }
+.reconciliation-activity__metrics { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; color: #aebeb4; font-size: 11px; }
+.reconciliation-activity__metrics strong { display: block; margin-top: 5px; color: #fff; font-size: 14px; }
+.reconciliation-unavailable { padding: 16px 18px; border-left: 3px solid #dba85e; background: #fbefd8; color: #6f5729; font-size: 12px; }
+.reconciliation-unavailable p { margin: 6px 0 0; line-height: 1.5; }
+.reconciliation-table-wrap { overflow-x: auto; }
+.reconciliation-table-wrap .vendor-table { min-width: 760px; }
+.reconciliation-table-wrap small { display: block; margin-top: 4px; color: #8a9890; font-size: 10px; }
+.reconciliation-view { padding: 8px 10px; border: 1px solid #d8dcd3; border-radius: 3px; color: #2d7770; background: transparent; font-size: 11px; font-weight: 700; }
+@media (max-width: 700px) { .owner-reconciliation-heading, .reconciliation-vendor-heading { align-items: flex-start; flex-direction: column; gap: 10px; }.owner-reconciliation-heading .button { margin-bottom: 0; }.reconciliation-grid { grid-template-columns: 1fr; }.reconciliation-activity { flex-direction: column; }.reconciliation-closing { grid-template-columns: 1fr; } }

@@ -1,0 +1,24 @@
+.reports-page { display: grid; gap: 24px; }
+.reports-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.reports-filters { display: flex; flex-wrap: wrap; gap: 16px; padding: 18px 20px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.reports-filters div { display: grid; gap: 7px; min-width: 180px; }
+.reports-filters label { color: #526a62; font-size: 11px; font-weight: 800; }
+.reports-filters input { min-height: 40px; padding: 0 11px; border: 1px solid #d8dcd3; border-radius: 4px; color: #38504a; background: #fff; }
+.reports-section { min-width: 0; padding: 22px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.reports-section-heading { display: flex; justify-content: space-between; margin-bottom: 18px; }
+.reports-section-heading h2 { margin: 7px 0 0; color: #1f2928; font-size: 22px; letter-spacing: -.05em; }
+.reports-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border: 1px solid #d8dcd3; background: #d8dcd3; }
+.reports-metrics div { display: grid; gap: 9px; padding: 17px; background: #fff; }
+.reports-metrics span { color: #70807a; font-size: 11px; }
+.reports-metrics strong { color: #1f2928; font-size: 22px; letter-spacing: -.04em; }
+.reports-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.reports-list { display: grid; gap: 1px; border: 1px solid #d8dcd3; background: #d8dcd3; }
+.reports-list div { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 13px 14px; background: #fff; color: #31554d; font-size: 12px; }
+.reports-list span { display: grid; gap: 4px; font-weight: 700; }
+.reports-list small { color: #8a9890; font-size: 10px; font-weight: 500; }
+.reports-list strong { color: #1f2928; }
+.reports-metrics--compact { grid-template-columns: repeat(3, 1fr); }
+.reports-empty { margin: 0; padding: 22px; color: #70807a; font-size: 12px; text-align: center; }
+.reports-error { display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid #efc8bd; background: #fff5f1; }
+.reports-error .form-error { margin: 0; }
+@media (max-width: 700px) { .reports-heading { align-items: flex-start; flex-direction: column; }.reports-grid { grid-template-columns: 1fr; }.reports-metrics { grid-template-columns: 1fr 1fr; } }

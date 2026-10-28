@@ -1,0 +1,34 @@
+.vendor-transactions-page { display: grid; gap: 24px; }
+.vendor-transactions-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.vendor-transactions-refresh { margin-bottom: 10px; padding: 10px 14px; border: 1px solid #d8dcd3; border-radius: 3px; color: #2d7770; background: #fbfaf6; font-size: 11px; font-weight: 800; }
+.vendor-transactions-refresh:hover { border-color: #2d7770; background: #e5f1eb; }
+.vendor-transaction-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.vendor-transaction-summary > div { padding: 20px; border: 1px solid #d8dcd3; border-top: 3px solid #2d7770; background: #fbfaf6; }
+.vendor-transaction-summary > div:first-child { border-top-color: #bd6546; }
+.vendor-transaction-summary > div:last-child { border-top-color: #dba85e; }
+.vendor-transaction-summary span, .vendor-transaction-summary small { display: block; color: #70807a; font-size: 11px; }
+.vendor-transaction-summary strong { display: block; margin: 8px 0 4px; color: #1f2928; font-size: 24px; letter-spacing: -.05em; }
+.vendor-transaction-summary small { color: #9aa59e; font-size: 10px; }
+.vendor-transactions-page .toolbar { padding: 18px; border: 1px solid #d8dcd3; background: #fbfaf6; }
+.vendor-transactions-page .toolbar input, .vendor-transactions-page .toolbar select, .vendor-transactions-page .toolbar button { min-height: 38px; padding: 0 10px; border: 1px solid #d8dcd3; border-radius: 3px; color: #38504a; background: #fff; font-size: 11px; }
+.vendor-transactions-page .toolbar button { background: #f5f3ed; font-weight: 700; }
+.vendor-transactions-page .toolbar button:hover { border-color: #bd775a; color: #a9553a; }
+.vendor-transactions-table-wrap { overflow-x: auto; }
+.vendor-transactions-page .transaction-table { min-width: 850px; border-collapse: collapse; background: #fbfaf6; }
+.vendor-transactions-page .transaction-table th { padding: 13px 15px; border-bottom: 1px solid #d8dcd3; color: #7b8981; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
+.vendor-transactions-page .transaction-table td { padding: 15px; border-bottom: 1px solid #ecece5; color: #526a62; font-size: 12px; }
+.vendor-transactions-page .transaction-table tbody tr:hover { background: #f5f3ed; }
+.vendor-transactions-page .transaction-table td:first-child { color: #9aa59e; font-family: 'DM Mono', monospace; font-size: 10px; }
+.vendor-transactions-page .transaction-table td:nth-child(3) { color: #1f2928; font-weight: 800; }
+.vendor-transactions-page .transaction-table td button { padding: 7px 10px; border: 1px solid #d8dcd3; border-radius: 3px; color: #2d7770; background: transparent; font-size: 11px; font-weight: 700; }
+.vendor-transactions-page .transaction-table td button:hover { border-color: #2d7770; background: #e5f1eb; }
+.vendor-transaction-status { display: inline-flex; padding: 5px 8px; border-radius: 99px; font-family: 'DM Mono', monospace; font-size: 10px; }
+.vendor-transaction-status--green { color: #2d7770; background: #e5f1eb; }
+.vendor-transaction-status--orange { color: #9a6a25; background: #fbefd8; }
+.vendor-transaction-status--red { color: #a9553a; background: #fbe9e3; }
+.vendor-transaction-status--gray { color: #687771; background: #edf0eb; }
+.vendor-transactions-empty { display: grid; gap: 6px; padding: 36px; border: 1px dashed #d8dcd3; color: #70807a; background: #fbfaf6; text-align: center; }
+.vendor-transactions-empty strong { color: #38504a; }
+.vendor-transactions-page .pagination { align-items: center; color: #70807a; font-family: 'DM Mono', monospace; font-size: 11px; }
+.vendor-transactions-page .pagination button { padding: 8px 12px; border: 1px solid #d8dcd3; border-radius: 3px; color: #38504a; background: #fbfaf6; font-size: 11px; }
+@media (max-width: 650px) { .vendor-transactions-heading { align-items: flex-start; flex-direction: column; gap: 8px; }.vendor-transactions-refresh { margin-bottom: 0; }.vendor-transaction-summary { grid-template-columns: 1fr; } }

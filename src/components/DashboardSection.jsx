@@ -1,0 +1,1 @@
+export default function DashboardSection({ title, eyebrow, action, children, className = '' }) { return <section className={`dashboard-section ${className}`}><div className="section-heading"><div><span className="section-eyebrow">{eyebrow}</span><h2>{title}</h2></div>{action}</div>{children}</section>; }

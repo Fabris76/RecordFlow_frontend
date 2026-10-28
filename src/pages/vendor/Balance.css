@@ -1,0 +1,122 @@
+.balance-page {
+  display: grid;
+  gap: 24px;
+}
+
+.balance-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.balance-heading .button {
+  margin-bottom: 10px;
+}
+
+.balance-overview {
+  display: grid;
+  grid-template-columns: minmax(230px, .9fr) minmax(0, 1.5fr);
+  gap: 16px;
+}
+
+.balance-total-card {
+  display: flex;
+  min-height: 170px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px;
+  color: #f8f6ee;
+  background: #1d3734;
+  box-shadow: 0 14px 30px rgba(29, 55, 52, .16);
+}
+
+.balance-card-label {
+  color: #e7b66f;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.balance-total-card strong {
+  margin: 12px 0 4px;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -.07em;
+}
+
+.balance-total-card small {
+  color: #aebeb4;
+  font-size: 11px;
+}
+
+.balance-page .balance-detail-grid {
+  margin-top: 0;
+}
+
+.balance-page .balance-detail-card {
+  display: flex;
+  min-height: 170px;
+  flex-direction: column;
+  justify-content: center;
+  border-color: #e0e0d7;
+  box-shadow: 0 10px 24px rgba(31, 41, 40, .04);
+}
+
+.balance-page .balance-detail-card:first-child {
+  border-top: 3px solid #bd6546;
+}
+
+.balance-page .balance-detail-card:last-child {
+  border-top: 3px solid #2d7770;
+}
+
+.balance-page .balance-detail-card span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.balance-page .balance-updated {
+  margin: -12px 0 12px;
+}
+
+.balance-page .dashboard-section {
+  margin-top: 4px;
+}
+
+.balance-history-table .management-table {
+  min-width: 700px;
+}
+
+.balance-history-table .management-table td strong,
+.balance-history-table .management-table td small {
+  display: block;
+}
+
+.balance-history-table .management-table td small {
+  margin-top: 3px;
+  color: #9aa59e;
+  font-size: 10px;
+}
+
+.balance-type {
+  display: inline-flex;
+  padding: 5px 8px;
+  border-radius: 99px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+}
+
+.balance-type--cash { color: #a9553a; background: #fbe9e3; }
+.balance-type--momo { color: #2d7770; background: #e5f1eb; }
+.balance-change { font-weight: 800; }
+.balance-change--positive { color: #2d7770; }
+.balance-change--negative { color: #a9553a; }
+
+@media (max-width: 760px) {
+  .balance-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .balance-heading .button { margin-bottom: 0; }
+  .balance-overview { grid-template-columns: 1fr; }
+}

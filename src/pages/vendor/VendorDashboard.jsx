@@ -1,0 +1,28 @@
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getRecentVendorTransactions, getVendorDashboard } from '../../services/vendorDashboardService';
+import { getOwnBalance } from '../../services/balanceService';
+import { formatMoney, formatNumber, todayLabel } from '../../utils/formatters';
+import { useAuth } from '../../context/AuthContext';
+import Button from '../../components/Button';
+import DashboardSection from '../../components/DashboardSection';
+import LoadingSpinner from '../../components/LoadingSpinner';
+import SummaryCard from '../../components/SummaryCard';
+
+function EmptyState({ children }) { return <div className="empty-state">{children}</div>; }
+function transactionLabel(type) { return type.replace('_', ' ').toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase()); }
+
+export default function VendorDashboard() {
+  const { user } = useAuth(); const navigate = useNavigate(); const [data, setData] = useState(null); const [transactions, setTransactions] = useState([]); const [loading, setLoading] = useState(true); const [error, setError] = useState('');
+  const load = useCallback(async () => { setLoading(true); setError(''); const results = await Promise.allSettled([getVendorDashboard(), getRecentVendorTransactions(), getOwnBalance()]); if (results.every((result) => result.status === 'rejected')) { setError('Unable to load dashboard information.'); setLoading(false); return; } const dashboard = results[0].status === 'fulfilled' ? results[0].value.data : {}; const balanceResult = results[2].status === 'fulfilled' ? results[2].value.data : null; setData({ ...dashboard, balance: balanceResult }); setTransactions(results[1].status === 'fulfilled' ? results[1].value.data || [] : []); if (!balanceResult) setError('Balance information is currently unavailable.'); setLoading(false); }, []);
+  useEffect(() => { load(); }, [load]);
+  if (loading && !data) return <LoadingSpinner label="Loading vendor dashboard" />;
+  if (error && !data) return <section className="dashboard-error"><h1>Dashboard unavailable</h1><p>{error}</p><Button onClick={load}>Retry</Button></section>;
+  const today = data?.today || {}; const balance = data?.balance; const closing = data?.closing || { status: 'OPEN' }; const closed = closing.status === 'CLOSED';
+  return <div className="vendor-dashboard-page"><header className="vendor-dashboard-heading"><div><p className="eyebrow">{todayLabel()}</p><h1>Good morning, {user?.name || 'Vendor'}.</h1><p className="page-description">Here is your business activity for today.</p></div><Button variant="outline" onClick={load} disabled={loading}>{loading ? 'Refreshing...' : 'Refresh'}</Button></header>
+    <section className="summary-grid"><SummaryCard label="Transactions today" value={formatNumber(today.transaction_count)} detail="Completed activity" icon="01" tone="teal" /><SummaryCard label="Money handled" value={formatMoney(today.transaction_amount)} detail="Total transaction value" icon="02" tone="copper" /><SummaryCard label="Deposits" value={formatMoney(today.deposits)} detail="Completed today" icon="03" tone="gold" /><SummaryCard label="Withdrawals" value={formatMoney(today.withdrawals)} detail="Completed today" icon="04" tone="blue" /></section>
+    <div className="vendor-dashboard-columns"><DashboardSection title="Current balance" eyebrow="Your authorized balances"><div className="balance-pair">{balance ? <><div><span>Cash balance</span><strong>{formatMoney(balance.cash_balance)}</strong></div><div><span>MoMo balance</span><strong>{formatMoney(balance.momo_balance)}</strong></div></> : <EmptyState>Balance information unavailable.</EmptyState>}</div><a className="balance-link" href="/vendor/balance">View balance details</a></DashboardSection><DashboardSection title="Today's closing" eyebrow="Business day status"><div className={`vendor-closing-card${closed ? ' vendor-closing-card--closed' : ''}`}><div><span className="closing-status-dot" />{closed ? 'Business day closed' : 'Business day open'}</div>{closed ? <small>Closed at {closing.closed_at || 'today'}</small> : <small>Today is open and ready for transactions.</small>}<Button variant="outline" onClick={() => navigate('/vendor/closing')}>Open daily closing</Button></div></DashboardSection></div>
+    <div className="vendor-dashboard-columns"><DashboardSection title="Recent transactions" eyebrow="Your latest activity"><div className="recent-transactions">{transactions.length ? transactions.map((transaction) => <div className="recent-transaction" key={transaction.id}><span className={`transaction-mark transaction-mark--${transaction.type.toLowerCase()}`}>{transaction.type.charAt(0)}</span><div><strong>{transactionLabel(transaction.type)}</strong><small>{transaction.transaction_time || transaction.created_at || 'Time unavailable'}</small></div><b>{formatMoney(transaction.amount)}</b><em>{transaction.status}</em></div>) : <EmptyState>No transactions recorded today.</EmptyState>}</div></DashboardSection><DashboardSection title="Quick actions" eyebrow="Your workspace"><div className="vendor-quick-actions"><Button onClick={() => window.location.assign('/vendor/transactions/new')}>Record transaction</Button><Button variant="outline" disabled>View transactions · coming next</Button><Button variant="outline" disabled>View balance · use the card above</Button></div></DashboardSection></div>
+    <div className="vendor-info-strip"><span>Account</span><strong>{user?.phone}</strong><span>Status</span><strong className="account-active">{user?.status === 'ACTIVE' ? 'Active' : 'Inactive'}</strong><span>Notifications</span><strong>Owner-managed</strong></div>
+  </div>;
+}

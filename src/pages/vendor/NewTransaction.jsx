@@ -1,0 +1,45 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createTransaction } from '../../services/transactionService';
+import { getOwnBalance } from '../../services/balanceService';
+import { formatMoney } from '../../utils/formatters';
+import Button from '../../components/Button';
+import DashboardSection from '../../components/DashboardSection';
+import ErrorMessage from '../../components/ErrorMessage';
+import PageHeader from '../../components/PageHeader';
+import { useAuth } from '../../context/AuthContext';
+import './NewTransaction.css';
+
+const transactionTypes = [
+  ['DEPOSIT', 'Deposit', 'Customer adds money to their MoMo wallet.'],
+  ['WITHDRAWAL', 'Withdrawal', 'Customer withdraws money.'],
+  ['TRANSFER', 'Transfer', 'Money transfer transaction.'],
+  ['AIRTIME', 'Airtime', 'Airtime purchase.'],
+  ['DATA', 'Data', 'Data bundle purchase.'],
+  ['BILL_PAYMENT', 'Bill Payment', 'Payment of a supported bill.'],
+  ['OTHER', 'Other', 'Other supported business service.']
+];
+const initialForm = { type: '', amount: '', customer_reference: '' };
+
+export default function NewTransaction() {
+  const navigate = useNavigate(); const { user } = useAuth(); const [form, setForm] = useState(initialForm); const [error, setError] = useState(''); const [saving, setSaving] = useState(false); const [success, setSuccess] = useState(null); const [failed, setFailed] = useState(''); const [uncertain, setUncertain] = useState(false);
+  const selectedType = transactionTypes.find(([value]) => value === form.type);
+  const change = (field) => (event) => setForm((current) => ({ ...current, [field]: event.target.value }));
+  function validate() {
+    if (!form.type) return 'Select a transaction type.';
+    if (!/^\d+(?:\.\d{1,2})?$/.test(form.amount.trim()) || !Number.isFinite(Number(form.amount)) || Number(form.amount) <= 0 || Number(form.amount) > 1000000000) return 'Enter a positive amount with no more than two decimal places.';
+    if (form.customer_reference.trim().length > 100) return 'Customer reference must be 100 characters or fewer.';
+    return '';
+  }
+  async function submit(event) {
+    event.preventDefault(); const validationError = validate(); if (validationError) { setError(validationError); return; }
+    setSaving(true); setError(''); setFailed(''); setUncertain(false);
+    try { const idempotencyKey = crypto.randomUUID(); const response = await createTransaction({ type: form.type, amount: form.amount.trim(), ...(form.customer_reference.trim() ? { customer_reference: form.customer_reference.trim() } : {}) }, idempotencyKey); let balance = response.balance || null; if (!balance) { try { balance = (await getOwnBalance()).data; } catch { /* The transaction remains successful; dashboard reload will retry the balance request. */ } } setSuccess({ transaction: response.data, balance }); setForm(initialForm); }
+    catch (requestError) { if (requestError.code === 'TRANSACTION_TIMEOUT') setUncertain(true); else setFailed(requestError.status ? requestError.message : 'Unable to connect to the server. Please check your connection and try again.'); }
+    finally { setSaving(false); }
+  }
+  if (uncertain) return <div className="transaction-page"><PageHeader eyebrow="Vendor workspace" title="Transaction status could not be confirmed." description="The request timed out. Check transaction history before attempting another transaction." /><section className="transaction-success"><div className="transaction-failure-mark">!</div><h2>Transaction status could not be confirmed.</h2><p>Check transaction history before attempting another transaction.</p><div className="transaction-success-actions"><Button variant="outline" onClick={() => navigate('/vendor/transactions')}>Check Transaction History</Button></div></section></div>;
+  if (failed) return <div className="transaction-page"><PageHeader eyebrow="Vendor workspace" title="Transaction Failed" description="The backend did not complete this transaction." /><section className="transaction-success"><div className="transaction-failure-mark">!</div><h2>Transaction Failed</h2><p>{failed}</p><div className="transaction-success-actions"><Button onClick={() => setFailed('')}>Try Again</Button><Button variant="outline" onClick={() => navigate('/vendor/transactions')}>Back to Transactions</Button></div></section></div>;
+  if (success) { const transaction = success.transaction; const typeLabel = transactionTypes.find(([value]) => value === transaction.type)?.[1] || transaction.type; return <div className="transaction-page"><PageHeader eyebrow="Vendor workspace" title="Transaction Successful" description="The transaction was recorded by the backend." /><section className="transaction-success"><div className="success-mark">✓</div><h2>Transaction Successful</h2><dl><div><dt>Transaction ID</dt><dd>{transaction.transaction_reference || transaction.id}</dd></div><div><dt>Type</dt><dd>{typeLabel}</dd></div><div><dt>Amount</dt><dd>{formatMoney(transaction.amount)}</dd></div><div><dt>Customer Reference</dt><dd>{transaction.customer_reference || '-'}</dd></div><div><dt>Vendor</dt><dd>{user?.name || `Vendor #${transaction.vendor_id}`}</dd></div><div><dt>Date</dt><dd>{transaction.transaction_date || 'Recorded by server'}</dd></div><div><dt>Time</dt><dd>{transaction.transaction_time || 'Recorded by server'}</dd></div><div><dt>Status</dt><dd>{transaction.status}</dd></div></dl>{success.balance && <div className="balance-pair transaction-balance-refresh"><div><span>Cash Balance</span><strong>{formatMoney(success.balance.cash_balance)}</strong></div><div><span>MoMo Balance</span><strong>{formatMoney(success.balance.momo_balance)}</strong></div></div>}<div className="transaction-success-actions"><Button onClick={() => { setSuccess(null); setError(''); }}>New Transaction</Button><Button variant="outline" onClick={() => navigate(`/vendor/transactions/${transaction.id}`)}>View Transaction</Button><Button variant="outline" onClick={() => navigate('/vendor/transactions')}>Back to Transactions</Button></div></section></div>; }
+  return <div className="transaction-page record-transaction-page"><PageHeader eyebrow="Vendor workspace" title="Record Transaction" description="Capture a customer transaction securely and keep your business balances up to date." /><div className="record-transaction-layout"><DashboardSection title="Transaction details" eyebrow="Secure server-recorded entry" className="record-transaction-card"><div className="record-transaction-intro"><span className="record-transaction-intro__icon" aria-hidden="true">＋</span><div><strong>New transaction</strong><p>Enter the details below. Your business date and time will be recorded automatically.</p></div></div><form className="transaction-form" onSubmit={submit} noValidate><div className="record-field"><label htmlFor="transaction-type">Transaction type</label><select id="transaction-type" value={form.type} onChange={change('type')} disabled={saving}><option value="">Select a transaction type</option>{transactionTypes.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select>{selectedType && <p className="field-help">{selectedType[2]}</p>}</div><div className="record-field"><label htmlFor="transaction-amount">Amount</label><div className="amount-input"><span>GH₵</span><input id="transaction-amount" type="text" inputMode="decimal" pattern="[0-9]*" placeholder="0.00" value={form.amount} onChange={change('amount')} disabled={saving} autoComplete="off" /></div></div><div className="record-field"><label htmlFor="customer-reference">Customer reference <small>Optional</small></label><input id="customer-reference" type="text" maxLength="100" value={form.customer_reference} onChange={change('customer_reference')} disabled={saving} placeholder="Phone or external reference" autoComplete="off" /><p className="field-help">Use a phone number, receipt number, or other helpful reference.</p></div><ErrorMessage>{error}</ErrorMessage><div className="record-transaction-note"><span aria-hidden="true">i</span><p>Balances are calculated and updated by the backend after the transaction is successfully recorded.</p></div><div className="transaction-form-actions"><Button variant="outline" onClick={() => navigate('/vendor/dashboard')} disabled={saving}>Cancel</Button><Button type="submit" disabled={saving}>{saving ? 'Recording...' : 'Record transaction'}</Button></div></form></DashboardSection><aside className="record-transaction-side"><div className="record-transaction-side__badge">LIVE LEDGER</div><h2>Record with confidence.</h2><p>Every completed transaction is securely saved to your vendor account and reflected in your balance.</p><div className="record-transaction-side__steps"><div><b>01</b><span>Choose a service</span></div><div><b>02</b><span>Enter the amount</span></div><div><b>03</b><span>Confirm the entry</span></div></div></aside></div></div>;
+}

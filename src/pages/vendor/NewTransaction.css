@@ -1,0 +1,39 @@
+.record-transaction-page { max-width: 1040px; }
+.record-transaction-page .page-header { position: relative; padding-bottom: 24px; }
+.record-transaction-page .page-header::after { content: ''; position: absolute; left: 0; bottom: 0; width: 72px; height: 3px; background: #bd6546; }
+.record-transaction-page .page-description { max-width: 620px; }
+.record-transaction-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(240px, .7fr); gap: 18px; margin-top: 38px; align-items: start; }
+.record-transaction-card { margin-top: 0 !important; padding: 30px; border: 1px solid #dfe5dd; border-radius: 10px; box-shadow: 0 14px 30px rgba(31, 41, 40, .06); }
+.record-transaction-card .section-heading { padding-bottom: 20px; border-bottom: 1px solid #e8e9e2; }
+.record-transaction-card .section-heading h2 { font-size: 24px; }
+.record-transaction-intro { display: flex; align-items: flex-start; gap: 13px; margin: 24px 0 22px; padding: 17px; border: 1px solid #cfe5da; border-radius: 8px; background: linear-gradient(135deg, #f1f9f5, #eaf5ef); }
+.record-transaction-intro__icon { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; color: #fff; border-radius: 50%; background: #2d7770; font-size: 20px; }
+.record-transaction-intro strong { color: #1f2928; font-size: 13px; }
+.record-transaction-intro p { margin: 4px 0 0; color: #5c746b; font-size: 11px; line-height: 1.5; }
+.record-transaction-card .transaction-form { max-width: none; gap: 20px; }
+.record-field { display: grid; gap: 7px; }
+.record-field .field-help { margin: -2px 0 0; }
+.record-transaction-card .transaction-form label { margin: 0; color: #31554d; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.record-transaction-card .transaction-form label small { color: #8a9890; font-size: 10px; text-transform: none; }
+.record-transaction-card .transaction-form select, .record-transaction-card .transaction-form input { min-height: 48px; padding: 13px 14px; border: 1px solid #d1dcd3; border-radius: 7px; outline: none; background: #fff; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.record-transaction-card .transaction-form select:focus, .record-transaction-card .transaction-form input:focus { border-color: #2d7770; box-shadow: 0 0 0 3px rgba(45, 119, 112, .13); }
+.record-transaction-card .transaction-form select:hover, .record-transaction-card .transaction-form input:hover { border-color: #9fb9ad; }
+.record-transaction-card .amount-input { min-height: 58px; border: 1px solid #d1dcd3; border-radius: 8px; background: #fff; box-shadow: inset 0 1px 2px rgba(31, 41, 40, .03); transition: border-color .18s ease, box-shadow .18s ease; }
+.record-transaction-card .amount-input:focus-within { border-color: #bd6546; box-shadow: 0 0 0 3px rgba(189, 101, 70, .13); }
+.record-transaction-card .amount-input span { padding-left: 14px; color: #bd6546; font-size: 13px; }
+.record-transaction-card .amount-input input { height: 56px; border: 0 !important; box-shadow: none !important; padding-left: 9px; color: #1f2928; font-size: 22px; font-weight: 800; }
+.record-transaction-note { display: flex; gap: 8px; align-items: flex-start; padding: 11px 12px; border-left: 3px solid #dba85e; background: #fff8e9; }
+.record-transaction-note span { display: grid; width: 17px; height: 17px; flex: 0 0 auto; place-items: center; color: #7d5b20; border: 1px solid #c59b53; border-radius: 50%; font-family: Georgia, serif; font-size: 11px; font-weight: 700; }
+.record-transaction-note p { margin: 0; color: #6d572d; font-size: 10px; line-height: 1.5; }
+.record-transaction-card .transaction-form-actions { justify-content: flex-end; margin-top: 4px; padding-top: 22px; border-top: 1px solid #e8e9e2; }
+.record-transaction-card .transaction-form-actions .button { min-width: 120px; }
+.record-transaction-card .transaction-form-actions .button--primary { min-width: 176px; box-shadow: 0 8px 18px rgba(189, 101, 70, .22); }
+.record-transaction-side { position: relative; overflow: hidden; padding: 30px; border-radius: 10px; color: #f8f6ee; background: linear-gradient(145deg, #1d3734, #28504a); box-shadow: 0 15px 32px rgba(29, 55, 52, .16); }
+.record-transaction-side::after { content: ''; position: absolute; right: -62px; bottom: -62px; width: 190px; height: 190px; border: 1px solid rgba(231, 182, 111, .22); border-radius: 50%; }
+.record-transaction-side__badge { color: #e7b66f; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; }
+.record-transaction-side h2 { margin: 28px 0 10px; font-size: 26px; line-height: 1.05; letter-spacing: -.06em; }
+.record-transaction-side > p { margin: 0; color: #c6d2c9; font-size: 12px; line-height: 1.7; }
+.record-transaction-side__steps { position: relative; z-index: 1; display: grid; gap: 14px; margin-top: 34px; padding-top: 20px; border-top: 1px solid #345c54; }
+.record-transaction-side__steps div { display: flex; align-items: center; gap: 10px; color: #d7e0d7; font-size: 11px; }
+.record-transaction-side__steps b { display: inline-grid; width: 25px; height: 25px; place-items: center; border: 1px solid rgba(231, 182, 111, .5); border-radius: 50%; color: #e7b66f; font-family: 'DM Mono', monospace; font-size: 10px; }
+@media (max-width: 760px) { .record-transaction-layout { grid-template-columns: 1fr; }.record-transaction-side { order: -1; }.record-transaction-side h2 { margin-top: 15px; }.record-transaction-card { padding: 20px; }.record-transaction-card .transaction-form-actions { flex-direction: column-reverse; }.record-transaction-card .transaction-form-actions .button { width: 100%; } }
