@@ -1,4 +1,7 @@
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/$/, '');
+const DEFAULT_API_URL = import.meta.env.PROD
+  ? 'https://recordflow-backend.vercel.app/api'
+  : 'http://localhost:5000/api';
+const API_URL = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).replace(/\/$/, '');
 
 export class ApiError extends Error {
   constructor(message, status, payload = {}) { super(message); this.name = 'ApiError'; this.status = status; this.payload = payload; }
