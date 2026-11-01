@@ -48,3 +48,131 @@
 .owner-balance-history .management-table { min-width: 680px; margin-top: 12px; }
 @media (max-width: 760px) { .owner-balance-heading { align-items: flex-start; flex-direction: column; gap: 8px; }.owner-balance-heading .button { margin-bottom: 0; }.owner-balance-summary, .owner-balance-meta { grid-template-columns: 1fr; }.owner-balance-detail__cards { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) { .owner-funds-cards, .owner-funds-form { grid-template-columns: 1fr; }.owner-funds-submit { width: 100%; } }
+
+.owner-balance-page { width: 100%; max-width: 1240px; gap: 22px; }
+.owner-balance-heading { align-items: flex-end; }
+.owner-balance-heading .page-header h1 { margin-bottom: 12px; }
+.owner-balance-heading .button { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.owner-balance-overview { display: grid; gap: 15px; padding: 22px; border: 1px solid #dce5dc; border-radius: 11px; background: linear-gradient(140deg, #f5f8f2, #fbfaf6 68%); box-shadow: 0 9px 24px rgba(31, 41, 40, .04); }
+.owner-balance-overview__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.owner-balance-overview__heading h2 { margin: 6px 0 0; color: #1f2928; font-size: 21px; letter-spacing: -.05em; }
+.owner-balance-vendor-count { padding: 7px 10px; border: 1px solid #dce5dc; border-radius: 99px; color: #49675d; background: #fff; font-size: 10px; white-space: nowrap; }
+.owner-balance-vendor-count strong { color: #245c55; font-size: 12px; }
+.owner-balance-summary { gap: 12px; }
+.owner-balance-card { position: relative; min-height: 158px; overflow: hidden; padding: 22px 24px; border: 1px solid #e1e6df; border-top: 0; border-radius: 9px; background: rgba(255, 255, 255, .88); box-shadow: 0 4px 13px rgba(31, 41, 40, .035); }
+.owner-balance-card::before { position: absolute; inset: 0 auto 0 0; width: 4px; content: ''; background: #bd6546; }
+.owner-balance-card--momo::before { background: #2d7770; }
+.owner-balance-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.owner-balance-card__top > span { color: #70807a; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+.owner-balance-card__top > i { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 9px; color: #a9553a; background: #fbebe4; font-size: 10px; font-style: normal; font-weight: 800; }
+.owner-balance-card--momo .owner-balance-card__top > i { color: #2d7770; background: #e5f1eb; }
+.owner-balance-card strong { margin: 15px 0 7px; color: #1f2928; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.065em; }
+.owner-balance-card small { display: inline-flex; align-items: center; gap: 6px; color: #84938b; font-size: 10px; }
+.owner-balance-card small i { width: 6px; height: 6px; border-radius: 50%; background: #6ca486; }
+.owner-funds-panel { gap: 18px; padding: 23px; border: 1px solid #d7e5d9; border-top: 0; border-radius: 10px; background: linear-gradient(130deg, #eaf4ed, #f5f8f2 70%, #fbfaf6); box-shadow: 0 9px 24px rgba(31, 41, 40, .04); }
+.owner-funds-panel h2 { font-size: 21px; letter-spacing: -.045em; }
+.owner-funds-panel > div:first-child p { max-width: 540px; line-height: 1.6; }
+.owner-funds-cards { gap: 10px; }
+.owner-funds-cards > div { border-radius: 7px; box-shadow: 0 3px 10px rgba(31, 41, 40, .03); }
+.owner-funds-cards span { font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+.owner-funds-cards strong { font-size: 22px; letter-spacing: -.045em; }
+.owner-funds-cards small { display: block; margin-top: 5px; color: #87948d; font-size: 10px; }
+.owner-funds-form { grid-template-columns: minmax(140px, .8fr) minmax(110px, .65fr) minmax(150px, 1fr) auto; }
+.owner-funds-form .button { align-self: stretch; margin: 0; }
+.owner-balance-meta { overflow: hidden; border-radius: 8px; }
+.owner-balance-meta > div { min-height: 76px; }
+.owner-balance-meta strong { font-size: 13px; }
+.owner-vendor-balances { min-width: 0; overflow: hidden; border: 1px solid #e0e5dd; border-radius: 10px; background: #fbfaf6; box-shadow: 0 8px 22px rgba(31, 41, 40, .035); }
+.owner-vendor-balances__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 21px 22px 17px; border-bottom: 1px solid #e8ece5; }
+.owner-vendor-balances__heading h2 { margin: 6px 0 5px; color: #1f2928; font-size: 22px; letter-spacing: -.05em; }
+.owner-vendor-balances__heading p { margin: 0; color: #829088; font-size: 11px; }
+.owner-vendor-record-count { color: #245c55; font-size: 15px; font-weight: 800; text-align: right; white-space: nowrap; }
+.owner-vendor-record-count small { display: block; margin-top: 3px; color: #8a9890; font-size: 9px; font-weight: 600; }
+.owner-vendor-balance-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #eef0eb; background: #f8f8f3; }
+.owner-vendor-search { display: flex; width: min(100%, 360px); align-items: center; gap: 8px; padding: 0 11px; border: 1px solid #dfe4dc; border-radius: 6px; background: #fff; }
+.owner-vendor-search > span:not(.sr-only) { color: #8a9890; font-size: 18px; }
+.owner-vendor-search input { width: 100%; min-width: 0; height: 38px; padding: 0; border: 0; outline: 0; color: #31554d; background: transparent; font: inherit; font-size: 11px; }
+.owner-vendor-search:focus-within { border-color: #2d7770; box-shadow: 0 0 0 3px rgba(45, 119, 112, .1); }
+.owner-vendor-search input::placeholder { color: #9aa59e; }
+.owner-vendor-status-filter { display: flex; align-items: center; gap: 9px; color: #70807a; font-size: 10px; font-weight: 800; white-space: nowrap; }
+.owner-vendor-status-filter select { min-width: 140px; height: 38px; padding: 0 10px; border: 1px solid #dfe4dc; border-radius: 6px; outline: 0; color: #31554d; background: #fff; font: inherit; font-size: 10px; }
+.owner-vendor-status-filter select:focus { border-color: #2d7770; box-shadow: 0 0 0 3px rgba(45, 119, 112, .1); }
+.owner-balance-table-wrap { width: 100%; }
+.owner-balance-table { width: 100%; min-width: 880px; border-collapse: collapse; background: #fbfaf6; }
+.owner-balance-table th { padding: 12px 15px; border-bottom: 1px solid #e8ece5; color: #8a9890; font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: .08em; text-align: left; text-transform: uppercase; }
+.owner-balance-table td { padding: 13px 15px; border-bottom: 1px solid #eef0eb; color: #60736b; font-size: 11px; }
+.owner-balance-table tbody tr:hover { background: #f5f8f3; }
+.owner-balance-table tbody tr:last-child td { border-bottom: 0; }
+.owner-balance-vendor { display: flex; align-items: center; gap: 9px; }
+.owner-balance-vendor > span { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border: 1px solid #d3e0d4; border-radius: 10px; color: #245c55; background: #e8f2e9; font-weight: 800; }
+.owner-balance-vendor > div { display: grid; gap: 3px; }
+.owner-balance-vendor strong { color: #31554d; font-size: 11px; }
+.owner-balance-vendor small { color: #9aa59e; font-size: 9px; }
+.owner-balance-table__cash { color: #a9553a; font-size: 11px; }
+.owner-balance-table__momo { color: #2d7770; font-size: 11px; }
+.owner-balance-updated { color: #7f8e86; font-size: 10px; }
+.owner-balance-view { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; border-color: #d8e3d9; border-radius: 5px; background: #fff; transition: .15s ease; }
+.owner-balance-view:hover { color: #245c55; background: #eaf4ed; }
+.owner-balance-empty { display: grid; justify-items: center; gap: 7px; padding: 38px 18px; text-align: center; }
+.owner-balance-empty > span { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 11px; color: #2d7770; background: #e5f1eb; font-size: 17px; }
+.owner-balance-empty strong { color: #31554d; font-size: 13px; }
+.owner-balance-empty p { margin: 0; color: #829088; font-size: 10px; }
+.owner-balance-detail { border-radius: 10px; box-shadow: 0 10px 28px rgba(31, 41, 40, .05); }
+.owner-balance-detail__cards > div { border: 1px solid #e5e9e1; border-radius: 7px; background: #f7f8f3; }
+.owner-balance-adjust { max-width: none; grid-template-columns: 1fr 1fr; align-items: end; gap: 9px 12px; }
+.owner-balance-adjust > div:first-child { grid-column: 1 / -1; }
+.owner-balance-adjust label { align-self: end; }
+.owner-balance-adjust input, .owner-balance-adjust select, .owner-balance-adjust textarea { min-height: 40px; border-radius: 5px; outline: 0; }
+.owner-balance-adjust textarea { grid-column: 1 / -1; min-height: 76px; }
+.owner-balance-adjust .button { justify-self: start; margin: 0; }
+.owner-balance-history { padding-top: 15px; border-top: 1px solid #e8e9e2; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+@media (max-width: 900px) { .owner-funds-form { grid-template-columns: 1fr 1fr; }.owner-funds-submit { width: 100%; }.owner-balance-detail__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .owner-balance-heading { align-items: flex-start; flex-direction: column; }.owner-balance-heading .button { margin: 0; }.owner-balance-overview { padding: 17px; }.owner-balance-overview__heading { align-items: flex-start; flex-direction: column; }.owner-vendor-balances__heading { align-items: flex-start; padding: 17px; }.owner-vendor-balance-tools { align-items: stretch; flex-direction: column; padding: 12px; }.owner-vendor-search { width: 100%; }.owner-vendor-status-filter { align-items: center; justify-content: space-between; }.owner-vendor-status-filter select { flex: 1; }.owner-balance-adjust { grid-template-columns: 1fr; }.owner-balance-adjust > div:first-child, .owner-balance-adjust textarea { grid-column: auto; }.owner-balance-adjust .button { width: 100%; }.owner-balance-detail { padding: 17px; } }
+@media (max-width: 480px) { .owner-balance-summary { grid-template-columns: 1fr; }.owner-balance-card { min-height: 135px; }.owner-balance-meta { grid-template-columns: 1fr; }.owner-funds-panel { padding: 17px; }.owner-funds-form { grid-template-columns: 1fr; }.owner-balance-detail__cards { grid-template-columns: 1fr; }.owner-vendor-balances__heading { flex-direction: column; }.owner-vendor-record-count { text-align: left; } }
+
+.owner-balance-hero { position: relative; isolation: isolate; display: grid; gap: 25px; overflow: hidden; padding: clamp(24px, 4vw, 38px); border: 1px solid #183b36; border-radius: 15px; color: #f7f8f1; background: radial-gradient(ellipse at 88% -10%, rgba(231, 182, 111, .22), transparent 35%), linear-gradient(125deg, #173b36 0%, #204f47 58%, #245b52 100%); box-shadow: 0 18px 36px rgba(29, 55, 52, .18); }
+.owner-balance-hero::after { position: absolute; z-index: -1; right: -96px; bottom: -220px; width: 390px; height: 390px; border: 1px solid rgba(235, 244, 231, .11); border-radius: 50%; box-shadow: 0 0 0 35px rgba(235, 244, 231, .025), 0 0 0 75px rgba(235, 244, 231, .02); content: ''; }
+.owner-balance-hero__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.owner-balance-hero__eyebrow { color: #e7b66f; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .13em; text-transform: uppercase; }
+.owner-balance-hero__eyebrow i { padding: 0 5px; color: #88aa9c; font-style: normal; }
+.owner-balance-hero__header h1 { margin: 12px 0 8px; color: #fbfaf6; font-size: clamp(34px, 4vw, 48px); line-height: 1; letter-spacing: -.07em; }
+.owner-balance-hero__header p { max-width: 500px; margin: 0; color: #bbcec3; font-size: 12px; line-height: 1.65; }
+.owner-balance-hero__header .button { min-height: 39px; margin: 0; border-color: rgba(232, 241, 230, .28); border-radius: 6px; color: #f7f8f1; background: rgba(255, 255, 255, .07); }
+.owner-balance-hero__header .button:hover:not(:disabled) { border-color: #e7b66f; color: #fff; background: rgba(255, 255, 255, .12); }
+.owner-balance-hero__header .button span { font-size: 15px; }
+.owner-balance-hero__grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) repeat(2, minmax(190px, 1fr)); gap: 12px; align-items: stretch; }
+.owner-balance-hero__total { display: grid; align-content: center; gap: 9px; min-width: 0; padding: 13px 0; }
+.owner-balance-hero__total > span { color: #b9cec2; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
+.owner-balance-hero__total strong { overflow: hidden; color: #fff; font-size: clamp(34px, 5vw, 54px); letter-spacing: -.075em; text-overflow: ellipsis; white-space: nowrap; }
+.owner-balance-hero__total small { color: #9fbaad; font-size: 10px; }
+.owner-balance-hero__type { display: grid; align-content: center; gap: 10px; padding: 17px; border: 1px solid rgba(233, 243, 233, .18); border-radius: 10px; background: rgba(255, 255, 255, .075); backdrop-filter: blur(8px); }
+.owner-balance-hero__type > span { display: flex; align-items: center; gap: 8px; color: #d5e2da; font-size: 10px; font-weight: 700; }
+.owner-balance-hero__type > span i { display: grid; width: 25px; height: 25px; place-items: center; border-radius: 8px; color: #fff0e7; background: rgba(212, 126, 89, .27); font-size: 9px; font-style: normal; font-weight: 800; }
+.owner-balance-hero__type--momo > span i { color: #d8f0e1; background: rgba(87, 165, 135, .28); }
+.owner-balance-hero__type strong { overflow: hidden; color: #fff; font-size: clamp(22px, 2.4vw, 29px); letter-spacing: -.055em; text-overflow: ellipsis; white-space: nowrap; }
+.owner-balance-hero__type small { color: #9fbaad; font-size: 9px; }
+.owner-balance-hero__footer { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 24px; padding-top: 14px; border-top: 1px solid rgba(233, 243, 233, .16); color: #aec4b8; font-size: 10px; }
+.owner-balance-hero__footer > span { display: inline-flex; align-items: center; gap: 7px; }
+.owner-balance-hero__footer > span:first-child i { width: 6px; height: 6px; border-radius: 50%; background: #82c39a; box-shadow: 0 0 0 4px rgba(130, 195, 154, .13); }
+.owner-balance-hero__footer strong:not(.business-day) { color: #e4ece5; font-size: 10px; font-weight: 600; }
+.owner-balance-hero__footer .business-day { padding: 4px 7px; color: #c8e8d3 !important; background: rgba(130, 195, 154, .15); }
+.owner-funds-panel { grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr); gap: 26px; align-items: stretch; padding: 25px; border-radius: 12px; }
+.owner-funds-panel__main { display: flex; flex-direction: column; justify-content: center; }
+.owner-funds-kicker { color: #8b6b37; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+.owner-funds-panel__main h2 { margin-top: 8px; font-size: 24px; }
+.owner-funds-panel__main > p { margin-bottom: 18px; }
+.owner-funds-cards { margin-top: 4px; }
+.owner-funds-cards > div { padding: 14px 15px; border-radius: 7px; }
+.owner-funds-cards strong { font-size: 20px; }
+.owner-funds-cards small { line-height: 1.4; }
+.owner-funds-form { grid-template-columns: 1fr 1fr; align-content: center; gap: 11px; padding: 18px; border: 1px solid #d7e2d6; border-radius: 9px; background: rgba(255, 255, 255, .64); }
+.owner-funds-form__heading { display: grid; grid-column: 1 / -1; gap: 5px; margin-bottom: 1px; }
+.owner-funds-form__heading > span { color: #9a7340; }
+.owner-funds-form__heading > strong { color: #31554d; font-size: 14px; }
+.owner-funds-form label { display: grid; gap: 6px; color: #526a62; font-size: 10px; font-weight: 800; }
+.owner-funds-form select, .owner-funds-form input { width: 100%; min-height: 40px; height: 40px; padding: 0 10px; border-radius: 5px; font-size: 11px; }
+.owner-funds-form__amount { grid-column: 1 / -1; }
+.owner-funds-form .button { width: 100%; min-height: 42px; grid-column: 1 / -1; }
+@media (max-width: 980px) { .owner-balance-hero__grid { grid-template-columns: 1fr 1fr; }.owner-balance-hero__total { grid-column: 1 / -1; }.owner-funds-panel { grid-template-columns: 1fr; }.owner-funds-panel__main { max-width: none; } }
+@media (max-width: 650px) { .owner-balance-hero { gap: 19px; padding: 21px; border-radius: 12px; }.owner-balance-hero__header { flex-direction: column; }.owner-balance-hero__header .button { align-self: flex-start; }.owner-balance-hero__grid { grid-template-columns: 1fr; }.owner-balance-hero__total { grid-column: auto; padding: 3px 0; }.owner-balance-hero__type { padding: 14px; }.owner-balance-hero__footer { display: grid; gap: 11px; }.owner-funds-panel { padding: 18px; }.owner-funds-form { grid-template-columns: 1fr; padding: 14px; }.owner-funds-form__heading, .owner-funds-form__amount, .owner-funds-form .button { grid-column: auto; } }

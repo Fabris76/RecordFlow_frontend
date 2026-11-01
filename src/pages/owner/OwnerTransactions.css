@@ -212,6 +212,43 @@
   font-size: 11px;
 }
 
+.vendor-transaction-groups { display: grid; gap: 16px; min-width: 0; }
+.vendor-transaction-groups__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 2px 2px 3px; }
+.vendor-transaction-groups__heading h2 { margin: 7px 0 0; color: #1f2928; font-size: 23px; letter-spacing: -.05em; }
+.vendor-transaction-groups__heading > span { padding-bottom: 3px; color: #829088; font-size: 11px; }
+.vendor-transaction-card { min-width: 0; overflow: hidden; border: 1px solid #e0e2da; border-radius: 10px; background: #fbfaf6; box-shadow: 0 8px 24px rgba(31, 41, 40, .035); }
+.vendor-transaction-card__header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 22px; border-bottom: 1px solid #e8e9e2; background: linear-gradient(105deg, #f0f5f0, #fbfaf6 65%); }
+.vendor-transaction-card__identity { display: flex; align-items: center; gap: 13px; min-width: 0; }
+.vendor-transaction-card__avatar { display: grid; width: 42px; height: 42px; flex: 0 0 auto; place-items: center; border: 1px solid #cbdcd0; border-radius: 12px; color: #245c55; background: #e3f0e8; font-size: 16px; font-weight: 800; }
+.vendor-transaction-card__identity div { display: grid; gap: 4px; min-width: 0; }
+.vendor-transaction-card__identity h3 { overflow: hidden; margin: 0; color: #1f2928; font-size: 16px; letter-spacing: -.025em; text-overflow: ellipsis; white-space: nowrap; }
+.vendor-transaction-card__identity div > span { color: #829088; font-size: 11px; }
+.vendor-transaction-card__total { display: grid; justify-items: end; gap: 4px; flex: 0 0 auto; }
+.vendor-transaction-card__total span { color: #829088; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.vendor-transaction-card__total strong { color: #245c55; font-size: 17px; letter-spacing: -.035em; }
+.vendor-transaction-card__scroll { overflow-x: auto; }
+.owner-transactions-page .vendor-transaction-card .transaction-table { width: 100%; min-width: 760px; border-collapse: collapse; background: #fbfaf6; }
+.owner-transactions-page .vendor-transaction-card .transaction-table th { padding: 12px 16px; border-bottom: 1px solid #e8e9e2; color: #8a9890; font-size: 9px; }
+.owner-transactions-page .vendor-transaction-card .transaction-table td { padding: 13px 16px; border-bottom: 1px solid #f0f0eb; color: #526a62; font-size: 11px; white-space: nowrap; }
+.owner-transactions-page .vendor-transaction-card .transaction-table tbody tr:last-child td { border-bottom: 0; }
+.owner-transactions-page .vendor-transaction-card .transaction-table tbody tr:hover { background: #f5f8f3; }
+.transaction-id { color: #86948d; font-family: 'DM Mono', monospace; font-size: 10px; }
+.transaction-type { color: #31554d; font-size: 10px; font-weight: 800; text-transform: capitalize; }
+.transaction-date, .transaction-time { display: block; }
+.transaction-date { color: #526a62; font-weight: 700; }
+.transaction-time { margin-top: 3px; color: #9aa59e; font-family: 'DM Mono', monospace; font-size: 9px; }
+.owner-transactions-page .vendor-transaction-card .transaction-table .transaction-table__amount { color: #1f2928; font-weight: 800; text-align: right; }
+.owner-transactions-page .transaction-open-button { padding: 6px 10px; border: 1px solid #d7e1d8; border-radius: 5px; color: #2d7770; background: #fff; font-size: 10px; font-weight: 800; transition: background .18s ease, border-color .18s ease; }
+.owner-transactions-page .transaction-open-button:hover { border-color: #2d7770; background: #eaf4ed; }
+.owner-transactions-empty { display: grid; justify-items: center; gap: 8px; padding: 54px 20px; border: 1px dashed #d5ddd4; border-radius: 10px; background: rgba(251, 250, 246, .75); text-align: center; }
+.owner-transactions-empty__mark { display: grid; width: 42px; height: 42px; margin-bottom: 4px; place-items: center; border-radius: 12px; color: #2d7770; background: #e5f1eb; font-size: 19px; }
+.owner-transactions-empty strong { color: #31554d; font-size: 15px; }
+.owner-transactions-empty > span:last-child { color: #829088; font-size: 11px; }
+.owner-transactions-page .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 2px; }
+.owner-transactions-page .pagination button { min-width: 72px; border-radius: 5px; transition: background .18s ease, border-color .18s ease; }
+.owner-transactions-page .pagination button:hover:not(:disabled) { border-color: #2d7770; background: #eaf4ed; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+
 @media (max-width: 700px) {
   .owner-transactions-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
   .owner-transactions-heading__meta { padding-bottom: 0; }
@@ -219,4 +256,10 @@
   .transaction-filter-panel__top { align-items: flex-start; }
   .transaction-filter-panel .toolbar > * { flex: 1 1 140px; }
   .transaction-filter-panel input:first-child { min-width: 0; flex-basis: 100%; }
+  .vendor-transaction-groups__heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+  .vendor-transaction-groups__heading > span { padding: 0; }
+  .vendor-transaction-card__header { align-items: flex-start; padding: 15px; }
+  .vendor-transaction-card__avatar { width: 36px; height: 36px; border-radius: 10px; }
+  .vendor-transaction-card__identity h3 { font-size: 14px; }
+  .vendor-transaction-card__total strong { font-size: 14px; }
 }

@@ -9,6 +9,27 @@ import SummaryCard from '../../components/SummaryCard';
 import { formatMoney, formatNumber } from '../../utils/format';
 import './OwnerTransactions.css';
 
+const formatTransactionDate = (value) => {
+  if (!value) return '\u2014';
+  const rawDate = value instanceof Date ? value.toISOString().slice(0, 10) : String(value).slice(0, 10);
+  const match = rawDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return String(value);
+  const [, year, month, day] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString('en-GH', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  });
+};
+
+const formatTransactionTime = (value) => {
+  if (!value) return '';
+  const rawTime = String(value).split('T').at(-1);
+  const match = rawTime.match(/^(\d{1,2}):(\d{2})/);
+  if (!match) return '';
+  const hour = Number(match[1]);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  return `${hour % 12 || 12}:${match[2]} ${period}`;
+};
+
 const TransactionStatusBadge = ({ status }) => {
   const colors = {
     COMPLETED: 'green',
@@ -148,6 +169,18 @@ export default function OwnerTransactions() {
     return summary;
   }, { amount: 0, completed: 0, pending: 0, failed: 0 });
   const totalPages = Math.ceil(Number(pagination.total || 0) / Number(pagination.limit || filters.limit)) || 1;
+  const vendorGroups = transactions.reduce((groups, transaction) => {
+    const vendorName = transaction.vendor_name || (transaction.vendor_id ? `Vendor ${transaction.vendor_id}` : 'Unknown vendor');
+    const vendorKey = transaction.vendor_id ? `vendor-${transaction.vendor_id}` : `name-${vendorName}`;
+    let group = groups.find((item) => item.key === vendorKey);
+    if (!group) {
+      group = { key: vendorKey, name: vendorName, transactions: [], amount: 0 };
+      groups.push(group);
+    }
+    group.transactions.push(transaction);
+    group.amount += Number(transaction.amount || 0);
+    return groups;
+  }, []);
 
   if (loading) return <LoadingSpinner fullScreen label="Loading transactions" />;
   if (error) return <ErrorMessage message={error} retry={fetchTransactions} />;
@@ -235,45 +268,46 @@ export default function OwnerTransactions() {
         </select>
       </div>
       </section>
-      {transactions.length === 0 ? (
-        <div>No transactions found for the selected criteria.</div>
-      ) : (
-        <div style={{ overflowX: 'auto' }}>
-        <table className="transaction-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Vendor</th>
-              <th>Type</th>
-              <th>Amount</th>
-              <th>Customer Ref</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((tx) => (
-              <tr key={tx.id}>
-                <td>{tx.id}</td>
-                <td>{tx.vendor_name || tx.vendor_id || '—'}</td>
-                <td>{tx.type}</td>
-                <td>{formatMoney(tx.amount)}</td>
-                <td>{tx.customer_reference || '—'}</td>
-                <td><TransactionStatusBadge status={tx.status} /></td>
-                <td>{tx.transaction_date || tx.created_at?.split('T')[0] || '—'}</td>
-                <td>{tx.transaction_time || tx.created_at?.split('T')[1]?.slice(0, 8) || '—'}</td>
-                <td>
-                  <button type="button" onClick={() => navigate(`/owner/transactions/${tx.id}`)}>
-                    Open
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {vendorGroups.length === 0 ? (
+        <div className="owner-transactions-empty">
+          <span className="owner-transactions-empty__mark" aria-hidden="true">{'\u2197'}</span>
+          <strong>No transactions found</strong>
+          <span>Try adjusting the filters to see business activity.</span>
         </div>
+      ) : (
+        <section className="vendor-transaction-groups" aria-label="Transactions grouped by vendor">
+          <div className="vendor-transaction-groups__heading">
+            <div><span className="transaction-filter-panel__eyebrow">Vendor breakdown</span><h2>Transactions by vendor</h2></div>
+            <span>{formatNumber(vendorGroups.length)} vendor{vendorGroups.length === 1 ? '' : 's'} on this page</span>
+          </div>
+          {vendorGroups.map((group) => (
+            <article className="vendor-transaction-card" key={group.key}>
+              <header className="vendor-transaction-card__header">
+                <div className="vendor-transaction-card__identity">
+                  <span className="vendor-transaction-card__avatar" aria-hidden="true">{group.name.charAt(0).toUpperCase()}</span>
+                  <div><h3>{group.name}</h3><span>{formatNumber(group.transactions.length)} transaction{group.transactions.length === 1 ? '' : 's'} on this page</span></div>
+                </div>
+                <div className="vendor-transaction-card__total"><span>Page total</span><strong>{formatMoney(group.amount)}</strong></div>
+              </header>
+              <div className="vendor-transaction-card__scroll">
+                <table className="transaction-table">
+                  <thead><tr><th>Transaction</th><th>Service</th><th>Customer reference</th><th>Date &amp; time</th><th>Status</th><th className="transaction-table__amount">Amount</th><th><span className="sr-only">Actions</span></th></tr></thead>
+                  <tbody>{group.transactions.map((tx) => (
+                    <tr key={tx.id}>
+                      <td><span className="transaction-id">#{tx.id}</span></td>
+                      <td><span className="transaction-type">{(tx.type || 'Transaction').replaceAll('_', ' ')}</span></td>
+                      <td>{tx.customer_reference || '\u2014'}</td>
+                      <td><span className="transaction-date">{formatTransactionDate(tx.transaction_date || tx.created_at)}</span><span className="transaction-time">{formatTransactionTime(tx.transaction_time || tx.created_at)}</span></td>
+                      <td><TransactionStatusBadge status={tx.status} /></td>
+                      <td className="transaction-table__amount">{formatMoney(tx.amount)}</td>
+                      <td><button className="transaction-open-button" type="button" onClick={() => navigate(`/owner/transactions/${tx.id}`)}>View</button></td>
+                    </tr>
+                  ))}</tbody>
+                </table>
+              </div>
+            </article>
+          ))}
+        </section>
       )}
       <div className="pagination" style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
         <button type="button" disabled={pagination.page <= 1} onClick={() => handlePageChange(pagination.page - 1)}>
